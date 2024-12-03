@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge Intervals</title>
+</head>
+<body>
+    <script>
+        function mergeIntervals(intervals) {
+            let merged = [];
+
+            intervals.forEach(interval => {
+                switch (true) {
+                    case merged.length === 0 || merged[merged.length - 1][1] < interval[0]:
+                        merged.push(interval);
+                        break;
+ 
+                    case merged[merged.length - 1][1] >= interval[0]:
+                        merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], interval[1]);
+                        break;
+
+                    default:
+                        console.error("Unexpected case encountered.");
+                }
+            });
+
+            return merged;
+        }
+
+        
+        const intervals = [[1, 3], [2, 4], [6, 8]];
+        console.log(mergeIntervals(intervals));
+    </script>
+</body>
+</html>
